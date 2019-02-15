@@ -169,3 +169,30 @@ func (contract *Contract) Validate(validatedObject Validator, msgs ...interface{
 	_panic(contract, "Validate", validatedObject.Validate(),
 		append(msgs, validatedObject))
 }
+
+var defaultContract = New()
+
+func Require(condition bool, msgs ...interface{}) {
+	_panic(defaultContract, "Require", condition, msgs)
+}
+
+func Ensure(condition bool, msgs ...interface{}) {
+	_panic(defaultContract, "Ensure", condition, msgs)
+}
+
+func Assert(condition bool, msgs ...interface{}) {
+	_panic(defaultContract, "Assert", condition, msgs)
+}
+
+func Check(condition bool, msgs ...interface{}) {
+	_panic(defaultContract, "Check", condition, msgs)
+}
+
+func SimpleValidate(validatedObject SimpleValidator, msgs ...interface{}) {
+	_panic(defaultContract, "Validate", validatedObject.Validate(), msgs)
+}
+
+func Validate(validatedObject Validator, msgs ...interface{}) {
+	_panic(defaultContract, "Validate", validatedObject.Validate(),
+		append(msgs, validatedObject))
+}
