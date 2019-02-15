@@ -64,28 +64,48 @@ func _panic(contract *Contract, function string, condition bool, msgs ...interfa
 //
 //    func f(parm1 int, parm2 int) {
 //        contract.Require(parm1 != parm2)
+//        ...
 //    }
 //
 func (contract *Contract) Require(condition bool, msgs ...interface{}) {
 	_panic(contract, "Require", condition, msgs)
 }
 
+// Requires check postconditions
+//
+//    ...
+//    contract := dbc.New()
+//    ...
+//
+//    func f() string {
+//       ..
+//       value, ok := someMap[key]
+//       contract.Ensure(ok)
+//       return value
+//    }
+//
 func (contract *Contract) Ensure(condition bool, msgs ...interface{}) {
 	_panic(contract, "Ensure", condition, msgs)
 }
 
+// Simple assert
 func (contract *Contract) Assert(condition bool, msgs ...interface{}) {
 	_panic(contract, "Assert", condition, msgs)
 }
 
+// Simple assert, but "Check" name
 func (contract *Contract) Check(condition bool, msgs ...interface{}) {
 	_panic(contract, "Check", condition, msgs)
 }
 
+// SimpleValidate use SimpleValidator interface for check conditions.
+// see *_test.go for more details
 func (contract *Contract) SimpleValidate(validatedObject SimpleValidator, msgs ...interface{}) {
 	_panic(contract, "Validate", validatedObject.Validate(), msgs)
 }
 
+// Validate use Validator interface (with Stringer) for check conditions.
+// see *_test.go for more details
 func (contract *Contract) Validate(validatedObject Validator, msgs ...interface{}) {
 	_panic(contract, "Validate", validatedObject.Validate(),
 		append(msgs, validatedObject))
