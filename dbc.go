@@ -8,6 +8,7 @@ import (
 	"runtime"
 )
 
+// Contract structure to hold info about Logger
 type Contract struct {
 	log Logger
 }
@@ -99,13 +100,71 @@ func (contract *Contract) Check(condition bool, msgs ...interface{}) {
 }
 
 // SimpleValidate use SimpleValidator interface for check conditions.
-// see *_test.go for more details
+/*
+
+    ...
+
+    type T1 struct {
+	    f bool
+    }
+
+    func (t1 T1) Validate() bool {
+	    return t1.f
+    }
+
+    ...
+
+	contract := New()
+
+    ...
+
+
+	t1 := T1{
+		f: false,
+    }
+
+    ...
+
+	contract.SimpleValidate(t1)
+
+*/
 func (contract *Contract) SimpleValidate(validatedObject SimpleValidator, msgs ...interface{}) {
 	_panic(contract, "Validate", validatedObject.Validate(), msgs)
 }
 
 // Validate use Validator interface (with Stringer) for check conditions.
-// see *_test.go for more details
+/*
+
+    ...
+
+    type T1 struct {
+	    f bool
+    }
+
+    func (t1 T1) Validate() bool {
+	    return t1.f
+    }
+
+    func (t1 T1) String() string {
+	    return fmt.Sprintf("T1.f: %t", t1.f)
+    }
+
+    ...
+
+	contract := New()
+
+    ...
+
+
+	t1 := T1{
+		f: false,
+    }
+
+    ...
+
+	contract.Validate(t1)
+
+*/
 func (contract *Contract) Validate(validatedObject Validator, msgs ...interface{}) {
 	_panic(contract, "Validate", validatedObject.Validate(),
 		append(msgs, validatedObject))
