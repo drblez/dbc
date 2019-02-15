@@ -1,4 +1,4 @@
-[![Documentation](https://godoc.org/drblez/dbc?status.svg)]
+![Documentation](https://godoc.org/drblez/dbc?status.svg)
 
 # Design by Contract for Go1
 
