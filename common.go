@@ -7,13 +7,13 @@ type Logger interface {
 	Debug(msg string)
 }
 
-// Interface for validating objects data
-type SimpleValidator interface {
-	Validate() bool
+// Interface for validating invariant of object
+type SimpleInvariantValidator interface {
+	Invariant() bool
 }
 
-// Interface for validating objects data with Stringer interface
-type Validator interface {
-	SimpleValidator
+// Interface for validating invariant of object with Stringer interface
+type InvariantValidator interface {
+	SimpleInvariantValidator
 	fmt.Stringer
 }

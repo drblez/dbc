@@ -1,4 +1,4 @@
-//+build !without_dbc
+//+build without_dbc
 
 package dbc
 
@@ -10,7 +10,7 @@ import (
 
 func TestContract_Assert(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		contract.Assert(false)
 	})
 	assert.NotPanics(t, func() {
@@ -20,7 +20,7 @@ func TestContract_Assert(t *testing.T) {
 
 func TestContract_Check(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		contract.Check(false)
 	})
 	assert.NotPanics(t, func() {
@@ -30,7 +30,7 @@ func TestContract_Check(t *testing.T) {
 
 func TestContract_Ensure(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		contract.Ensure(false)
 	})
 	assert.NotPanics(t, func() {
@@ -40,7 +40,7 @@ func TestContract_Ensure(t *testing.T) {
 
 func TestContract_Require(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		contract.Require(false)
 	})
 	assert.NotPanics(t, func() {
@@ -58,7 +58,7 @@ func (t1 T1) Invariant() bool {
 
 func TestContract_SimpleInvariant(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		t1 := T1{
 			f: false,
 		}
@@ -86,7 +86,7 @@ func (t2 T2) String() string {
 
 func TestContract_Invariant(t *testing.T) {
 	contract := New()
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		t2 := T2{
 			f: false,
 		}
@@ -101,7 +101,7 @@ func TestContract_Invariant(t *testing.T) {
 }
 
 func TestAssert(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		Assert(false)
 	})
 	assert.NotPanics(t, func() {
@@ -110,7 +110,7 @@ func TestAssert(t *testing.T) {
 }
 
 func TestCheck(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		Check(false)
 	})
 	assert.NotPanics(t, func() {
@@ -119,7 +119,7 @@ func TestCheck(t *testing.T) {
 }
 
 func TestEnsure(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		Ensure(false)
 	})
 	assert.NotPanics(t, func() {
@@ -128,7 +128,7 @@ func TestEnsure(t *testing.T) {
 }
 
 func TestRequire(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		Require(false)
 	})
 	assert.NotPanics(t, func() {
@@ -137,7 +137,7 @@ func TestRequire(t *testing.T) {
 }
 
 func TestSimpleInvariant(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		t1 := T1{
 			f: false,
 		}
@@ -152,7 +152,7 @@ func TestSimpleInvariant(t *testing.T) {
 }
 
 func TestInvariant(t *testing.T) {
-	assert.Panics(t, func() {
+	assert.NotPanics(t, func() {
 		t2 := T2{
 			f: false,
 		}

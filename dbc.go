@@ -99,74 +99,52 @@ func (contract *Contract) Check(condition bool, msgs ...interface{}) {
 	_panic(contract, "Check", condition, msgs)
 }
 
-// SimpleValidate use SimpleValidator interface for check conditions.
+// SimpleInvariant use SimpleInvariantValidator interface for check conditions.
 /*
-
-    ...
-
-    type T1 struct {
-	    f bool
-    }
-
-    func (t1 T1) Validate() bool {
-	    return t1.f
-    }
-
-    ...
-
-	contract := New()
-
-    ...
-
-
-	t1 := T1{
-		f: false,
-    }
-
-    ...
-
-	contract.SimpleValidate(t1)
-
+   ...
+   type T1 struct {
+       f bool
+   }
+   func (t1 T1) Invariant() bool {
+       return t1.f
+   }
+   ...
+   contract := New()
+   ...
+   t1 := T1{
+       f: false,
+   }
+   ...
+   contract.SimpleInvariant(t1)
 */
-func (contract *Contract) SimpleValidate(validatedObject SimpleValidator, msgs ...interface{}) {
-	_panic(contract, "Validate", validatedObject.Validate(), msgs)
+func (contract *Contract) SimpleInvariant(validatedObject SimpleInvariantValidator, msgs ...interface{}) {
+	_panic(contract, "Invariant", validatedObject.Invariant(), msgs)
 }
 
-// Validate use Validator interface (with Stringer) for check conditions.
+// Invariant use Validator interface (with Stringer) for check conditions.
 /*
-
-    ...
-
-    type T1 struct {
-	    f bool
-    }
-
-    func (t1 T1) Validate() bool {
-	    return t1.f
-    }
-
-    func (t1 T1) String() string {
-	    return fmt.Sprintf("T1.f: %t", t1.f)
-    }
-
-    ...
-
-	contract := New()
-
-    ...
-
-
-	t1 := T1{
-		f: false,
-    }
-
-    ...
-
-	contract.Validate(t1)
+   ...
+   type T1 struct {
+       f bool
+   }
+   func (t1 T1) Invariant() bool {
+       return t1.f
+   }
+   func (t1 T1) String() string {
+       return fmt.Sprintf("T1.f: %t", t1.f)
+   }
+   ...
+   contract := New()
+   ...
+   t1 := T1{
+       f: false,
+   }
+   ...
+   contract.Invariant(t1)
 
 */
-func (contract *Contract) Validate(validatedObject Validator, msgs ...interface{}) {
-	_panic(contract, "Validate", validatedObject.Validate(),
+func (contract *Contract) Invariant(validatedObject InvariantValidator, msgs ...interface{}) {
+	_panic(contract, "Invariant", validatedObject.Invariant(),
 		append(msgs, validatedObject))
 }
 
@@ -188,11 +166,11 @@ func Check(condition bool, msgs ...interface{}) {
 	_panic(defaultContract, "Check", condition, msgs)
 }
 
-func SimpleValidate(validatedObject SimpleValidator, msgs ...interface{}) {
-	_panic(defaultContract, "Validate", validatedObject.Validate(), msgs)
+func SimpleInvariant(validatedObject SimpleInvariantValidator, msgs ...interface{}) {
+	_panic(defaultContract, "Invariant", validatedObject.Invariant(), msgs)
 }
 
-func Validate(validatedObject Validator, msgs ...interface{}) {
-	_panic(defaultContract, "Validate", validatedObject.Validate(),
+func Invariant(validatedObject InvariantValidator, msgs ...interface{}) {
+	_panic(defaultContract, "Invariant", validatedObject.Invariant(),
 		append(msgs, validatedObject))
 }
